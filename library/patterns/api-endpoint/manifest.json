@@ -1,0 +1,172 @@
+{
+  "id": "api-endpoint",
+  "name": "API Endpoint",
+  "description": "Create a JSON API endpoint with proper response formatting and error handling",
+  "category": "api",
+  "triggers": [
+    "create api",
+    "add api endpoint",
+    "json api",
+    "rest api",
+    "api controller"
+  ],
+  "workflow": {
+    "id": "wf-api-endpoint",
+    "steps": [
+      {
+        "id": "resource_name",
+        "question": "What resource is this API for?",
+        "type": "text",
+        "validation": "/^[A-Z][a-zA-Z0-9]*$/",
+        "affects": ["templates"]
+      },
+      {
+        "id": "api_version",
+        "question": "Which API version namespace?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "v1",
+            "label": "v1",
+            "description": "API version 1",
+            "recommended": true
+          },
+          {
+            "value": "v2",
+            "label": "v2",
+            "description": "API version 2"
+          },
+          {
+            "value": "none",
+            "label": "No versioning",
+            "description": "No version namespace"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "actions",
+        "question": "Which API actions should be included?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "index",
+            "label": "Index",
+            "description": "GET /api/resources - List all",
+            "recommended": true
+          },
+          {
+            "value": "show",
+            "label": "Show",
+            "description": "GET /api/resources/:id - Get one",
+            "recommended": true
+          },
+          {
+            "value": "create",
+            "label": "Create",
+            "description": "POST /api/resources - Create new",
+            "recommended": true
+          },
+          {
+            "value": "update",
+            "label": "Update",
+            "description": "PATCH /api/resources/:id - Update",
+            "recommended": true
+          },
+          {
+            "value": "destroy",
+            "label": "Destroy",
+            "description": "DELETE /api/resources/:id - Delete"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "authentication",
+        "question": "What authentication method?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "jwt",
+            "label": "JWT Token",
+            "description": "JSON Web Token authentication"
+          },
+          {
+            "value": "api_key",
+            "label": "API Key",
+            "description": "API key in header"
+          },
+          {
+            "value": "session",
+            "label": "Session-based",
+            "description": "Use existing session authentication"
+          },
+          {
+            "value": "none",
+            "label": "No authentication",
+            "description": "Public API endpoint"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "serializer",
+        "question": "How should responses be serialized?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "jbuilder",
+            "label": "Jbuilder",
+            "description": "Use Jbuilder templates"
+          },
+          {
+            "value": "active_model_serializers",
+            "label": "ActiveModelSerializers",
+            "description": "Use AMS gem"
+          },
+          {
+            "value": "inline",
+            "label": "Inline JSON",
+            "description": "Direct render json"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "pagination",
+        "question": "Include pagination for list endpoints?",
+        "type": "confirm",
+        "affects": ["templates", "snippets"]
+      }
+    ],
+    "context_requirements": [
+      {
+        "type": "file",
+        "pattern": "app/controllers/application_controller.rb"
+      }
+    ]
+  },
+  "templates": [
+    "controller-api",
+    "serializer",
+    "jbuilder-index",
+    "jbuilder-show"
+  ],
+  "snippets": [
+    "api-response-success",
+    "api-response-error",
+    "api-pagination"
+  ],
+  "instructions": [
+    "Add API routes to config/routes.rb",
+    "Configure CORS if accessing from external clients",
+    "Set up authentication middleware"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "api",
+    "json",
+    "rest",
+    "controller"
+  ]
+}

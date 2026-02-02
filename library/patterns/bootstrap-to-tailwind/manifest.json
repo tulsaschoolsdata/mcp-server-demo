@@ -1,0 +1,90 @@
+{
+  "id": "bootstrap-to-tailwind",
+  "name": "Bootstrap to Tailwind Migration",
+  "description": "Migrate Bootstrap CSS classes to Tailwind CSS equivalents",
+  "category": "view",
+  "triggers": [
+    "bootstrap to tailwind",
+    "migrate css",
+    "convert bootstrap",
+    "tailwind migration",
+    "replace bootstrap"
+  ],
+  "workflow": {
+    "id": "wf-bootstrap-tailwind",
+    "steps": [
+      {
+        "id": "scope",
+        "question": "What scope of migration?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full project",
+            "description": "Migrate all Bootstrap classes"
+          },
+          {
+            "value": "component",
+            "label": "Single component",
+            "description": "Migrate one component at a time"
+          },
+          {
+            "value": "file",
+            "label": "Single file",
+            "description": "Migrate specific file"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "file_path",
+        "question": "Path to file/component to migrate (leave empty for full project)",
+        "type": "text",
+        "condition": "answers.scope !== 'full'",
+        "affects": ["templates"]
+      },
+      {
+        "id": "preserve_bootstrap",
+        "question": "Keep Bootstrap as fallback during migration?",
+        "type": "confirm",
+        "affects": ["instructions"]
+      },
+      {
+        "id": "custom_mappings",
+        "question": "Do you have custom Bootstrap classes to map?",
+        "type": "confirm",
+        "affects": ["templates"]
+      }
+    ],
+    "context_requirements": [
+      {
+        "type": "file",
+        "pattern": "tailwind.config.js",
+        "optional": true
+      }
+    ]
+  },
+  "templates": [],
+  "snippets": [
+    "tailwind-button",
+    "tailwind-card",
+    "tailwind-form",
+    "tailwind-alert"
+  ],
+  "instructions": [
+    "Install Tailwind CSS: npm install -D tailwindcss postcss autoprefixer",
+    "Initialize Tailwind: npx tailwindcss init",
+    "Add Tailwind directives to your CSS",
+    "Run the migration tool to convert classes",
+    "Test each component after migration",
+    "Remove Bootstrap when migration is complete"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "css",
+    "bootstrap",
+    "tailwind",
+    "migration",
+    "styling"
+  ]
+}

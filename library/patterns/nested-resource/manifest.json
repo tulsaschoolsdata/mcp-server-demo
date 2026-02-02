@@ -1,0 +1,124 @@
+{
+  "id": "nested-resource",
+  "name": "Nested Resource",
+  "description": "Create a nested resource like comments, replies, or child items",
+  "category": "full-stack",
+  "triggers": [
+    "nested resource",
+    "comments",
+    "replies",
+    "child resource",
+    "belongs to",
+    "has many"
+  ],
+  "workflow": {
+    "id": "wf-nested-resource",
+    "steps": [
+      {
+        "id": "parent_model",
+        "question": "What is the parent model? (e.g., Post, Article)",
+        "type": "text",
+        "affects": ["templates"]
+      },
+      {
+        "id": "child_model",
+        "question": "What is the child/nested model name? (e.g., Comment, Reply)",
+        "type": "text",
+        "affects": ["templates"]
+      },
+      {
+        "id": "child_fields",
+        "question": "What fields should the nested model have?",
+        "type": "text",
+        "default": "body:text",
+        "affects": ["templates"]
+      },
+      {
+        "id": "depth",
+        "question": "Allow nested replies (recursive nesting)?",
+        "type": "confirm",
+        "affects": ["templates"]
+      },
+      {
+        "id": "features",
+        "question": "What features should be included?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "user_association",
+            "label": "User association",
+            "description": "Track who created each item"
+          },
+          {
+            "value": "soft_delete",
+            "label": "Soft delete",
+            "description": "Mark as deleted instead of removing"
+          },
+          {
+            "value": "counter_cache",
+            "label": "Counter cache",
+            "description": "Cache count on parent"
+          },
+          {
+            "value": "ordering",
+            "label": "Custom ordering",
+            "description": "Add position/order field"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "react_component",
+        "question": "Generate React components?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "list",
+            "label": "Nested list component",
+            "recommended": true
+          },
+          {
+            "value": "form",
+            "label": "Inline form component",
+            "recommended": true
+          },
+          {
+            "value": "item",
+            "label": "Single item component"
+          }
+        ],
+        "affects": ["templates"]
+      }
+    ],
+    "context_requirements": [
+      {
+        "type": "model",
+        "pattern": "{{parentModel}}"
+      }
+    ]
+  },
+  "templates": [
+    "model-nested",
+    "migration-nested",
+    "controller-nested",
+    "component-nested-list",
+    "component-nested-form"
+  ],
+  "snippets": [
+    "nested-routes",
+    "counter-cache"
+  ],
+  "instructions": [
+    "Run `rails db:migrate` to create the table",
+    "Add nested routes: `resources :{{parent}} { resources :{{child}} }`",
+    "Import and use the React components"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "nested",
+    "comments",
+    "replies",
+    "association",
+    "parent-child"
+  ]
+}

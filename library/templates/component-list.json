@@ -1,0 +1,39 @@
+{
+  "id": "component-list",
+  "name": "List Component",
+  "description": "React component for displaying a list of resources",
+  "category": "component",
+  "language": "typescript",
+  "filePath": "templates/component-list.ejs",
+  "outputPath": "app/javascript/components/<%= modelName %>/<%= modelName %>List.tsx",
+  "variables": [
+    {
+      "name": "modelName",
+      "type": "string",
+      "required": true,
+      "description": "Name of the model (PascalCase)"
+    },
+    {
+      "name": "fields",
+      "type": "array",
+      "required": true,
+      "description": "Fields to display in the list"
+    },
+    {
+      "name": "cssFramework",
+      "type": "string",
+      "required": false,
+      "default": "tailwind",
+      "description": "CSS framework to use (tailwind, bootstrap, none)"
+    },
+    {
+      "name": "pagination",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Include pagination"
+    }
+  ],
+  "version": "1.0.0",
+  "tags": ["component", "react", "list", "typescript"]
+}

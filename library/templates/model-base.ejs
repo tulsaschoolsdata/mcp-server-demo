@@ -1,0 +1,66 @@
+# frozen_string_literal: true
+
+class <%= modelName %> < ApplicationRecord
+<% if (associations.belongsTo && associations.belongsTo.length > 0) { %>
+  # Associations
+<% associations.belongsTo.forEach(function(assoc) { %>
+  belongs_to :<%= assoc %>
+<% }); %>
+<% } %>
+<% if (associations.hasOne && associations.hasOne.length > 0) { %>
+<% associations.hasOne.forEach(function(assoc) { %>
+  has_one :<%= assoc %>
+<% }); %>
+<% } %>
+<% if (associations.hasMany && associations.hasMany.length > 0) { %>
+<% associations.hasMany.forEach(function(assoc) { %>
+  has_many :<%= assoc %>, dependent: :destroy
+<% }); %>
+<% } %>
+<% if (associations.hasAndBelongsToMany && associations.hasAndBelongsToMany.length > 0) { %>
+<% associations.hasAndBelongsToMany.forEach(function(assoc) { %>
+  has_and_belongs_to_many :<%= assoc %>
+<% }); %>
+<% } %>
+
+<% if (validations.presence && validations.presence.length > 0) { %>
+  # Validations
+  validates <%= validations.presence.map(function(f) { return ':' + f; }).join(', ') %>, presence: true
+<% } %>
+<% if (validations.uniqueness && validations.uniqueness.length > 0) { %>
+  validates <%= validations.uniqueness.map(function(f) { return ':' + f; }).join(', ') %>, uniqueness: true
+<% } %>
+<% if (validations.format) { %>
+<% Object.entries(validations.format).forEach(function([field, regex]) { %>
+  validates :<%= field %>, format: { with: /<%= regex %>/ }
+<% }); %>
+<% } %>
+<% if (validations.length) { %>
+<% Object.entries(validations.length).forEach(function([field, opts]) { %>
+  validates :<%= field %>, length: { <%= Object.entries(opts).map(function([k, v]) { return k + ': ' + v; }).join(', ') %> }
+<% }); %>
+<% } %>
+
+<% if (scopes && scopes.length > 0) { %>
+  # Scopes
+<% scopes.forEach(function(scope) { %>
+  scope :<%= scope.name %>, <%= scope.lambda %>
+<% }); %>
+<% } %>
+
+<% if (callbacks && callbacks.length > 0) { %>
+  # Callbacks
+<% callbacks.forEach(function(callback) { %>
+  <%= callback.type %> :<%= callback.method %>
+<% }); %>
+
+  private
+
+<% callbacks.forEach(function(callback) { %>
+  def <%= callback.method %>
+    # TODO: Implement <%= callback.method %>
+  end
+
+<% }); %>
+<% } %>
+end

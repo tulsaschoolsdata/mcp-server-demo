@@ -1,0 +1,89 @@
+{
+  "id": "search-filter",
+  "name": "Search & Filter",
+  "description": "Add search and filtering functionality to a resource",
+  "category": "controller",
+  "triggers": [
+    "add search",
+    "search filter",
+    "filter results",
+    "searchable",
+    "filterable"
+  ],
+  "workflow": {
+    "id": "wf-search-filter",
+    "steps": [
+      {
+        "id": "model_name",
+        "question": "Which model should be searchable?",
+        "type": "text",
+        "affects": ["templates"]
+      },
+      {
+        "id": "search_fields",
+        "question": "Which fields should be searchable?",
+        "type": "text",
+        "default": "name, title",
+        "affects": ["templates"]
+      },
+      {
+        "id": "filter_fields",
+        "question": "Which fields should be filterable?",
+        "type": "text",
+        "default": "status, category",
+        "affects": ["templates"]
+      },
+      {
+        "id": "search_library",
+        "question": "Which search approach?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "simple",
+            "label": "Simple LIKE query",
+            "description": "Basic SQL LIKE search",
+            "recommended": true
+          },
+          {
+            "value": "pg_search",
+            "label": "pg_search gem",
+            "description": "PostgreSQL full-text search"
+          },
+          {
+            "value": "ransack",
+            "label": "Ransack gem",
+            "description": "Advanced search with Ransack"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "react_component",
+        "question": "Generate React search component?",
+        "type": "confirm",
+        "affects": ["templates"]
+      }
+    ],
+    "context_requirements": []
+  },
+  "templates": [
+    "concern-searchable",
+    "component-search-form"
+  ],
+  "snippets": [
+    "scope-search",
+    "scope-filter-by"
+  ],
+  "instructions": [
+    "Include the Searchable concern in your model",
+    "Add search params to controller strong params",
+    "Import the SearchForm component"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "search",
+    "filter",
+    "query",
+    "scope"
+  ]
+}

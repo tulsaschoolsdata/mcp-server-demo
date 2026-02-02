@@ -1,0 +1,94 @@
+{
+  "id": "pagination",
+  "name": "Pagination",
+  "description": "Add pagination to list views using Pagy or Kaminari",
+  "category": "controller",
+  "triggers": [
+    "add pagination",
+    "paginate",
+    "paged results",
+    "pagination"
+  ],
+  "workflow": {
+    "id": "wf-pagination",
+    "steps": [
+      {
+        "id": "gem",
+        "question": "Which pagination library?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "pagy",
+            "label": "Pagy",
+            "description": "Fast and lightweight pagination",
+            "recommended": true
+          },
+          {
+            "value": "kaminari",
+            "label": "Kaminari",
+            "description": "Full-featured pagination with views"
+          },
+          {
+            "value": "custom",
+            "label": "Custom implementation",
+            "description": "Build pagination from scratch"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "per_page",
+        "question": "How many items per page?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "10",
+            "label": "10 items"
+          },
+          {
+            "value": "20",
+            "label": "20 items"
+          },
+          {
+            "value": "25",
+            "label": "25 items",
+            "recommended": true
+          },
+          {
+            "value": "50",
+            "label": "50 items"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "react_component",
+        "question": "Generate React pagination component?",
+        "type": "confirm",
+        "affects": ["templates"]
+      }
+    ],
+    "context_requirements": []
+  },
+  "templates": [
+    "concern-paginatable",
+    "component-pagination"
+  ],
+  "snippets": [
+    "pagy-controller",
+    "pagy-view-helper"
+  ],
+  "instructions": [
+    "Add gem to Gemfile: gem 'pagy' or gem 'kaminari'",
+    "Run bundle install",
+    "Include Pagy::Backend in ApplicationController",
+    "Include Pagy::Frontend in ApplicationHelper"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "pagination",
+    "pagy",
+    "kaminari",
+    "list"
+  ]
+}

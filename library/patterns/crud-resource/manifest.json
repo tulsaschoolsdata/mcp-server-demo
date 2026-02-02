@@ -1,0 +1,230 @@
+{
+  "id": "crud-resource",
+  "name": "CRUD Resource",
+  "description": "Create a full CRUD resource with model, migration, controller, and React components",
+  "category": "full-stack",
+  "triggers": [
+    "create a model",
+    "add a model",
+    "new resource",
+    "crud",
+    "scaffold",
+    "create model with",
+    "add resource"
+  ],
+  "workflow": {
+    "id": "wf-crud-resource",
+    "steps": [
+      {
+        "id": "model_name",
+        "question": "What is the name of the model? (e.g., Post, Product, Article)",
+        "type": "text",
+        "validation": "/^[A-Z][a-zA-Z0-9]*$/",
+        "affects": ["templates"]
+      },
+      {
+        "id": "fields",
+        "question": "What fields should the model have? (comma-separated, format: name:type)",
+        "type": "text",
+        "default": "name:string",
+        "affects": ["templates"]
+      },
+      {
+        "id": "associations",
+        "question": "What associations does this model have?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "belongs_to_user",
+            "label": "Belongs to User",
+            "description": "Add user_id foreign key and belongs_to :user",
+            "templates": ["migration-user-fk"]
+          },
+          {
+            "value": "has_many_comments",
+            "label": "Has many comments",
+            "description": "Add has_many :comments association"
+          },
+          {
+            "value": "has_attachments",
+            "label": "Has file attachments",
+            "description": "Add Active Storage attachments",
+            "templates": ["model-attachments"]
+          },
+          {
+            "value": "none",
+            "label": "No associations",
+            "description": "Create a standalone model"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "validations",
+        "question": "What validations should be added?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "presence",
+            "label": "Presence validation",
+            "description": "Require certain fields to be present",
+            "recommended": true
+          },
+          {
+            "value": "uniqueness",
+            "label": "Uniqueness validation",
+            "description": "Ensure field values are unique"
+          },
+          {
+            "value": "format",
+            "label": "Format validation",
+            "description": "Validate field format with regex"
+          },
+          {
+            "value": "length",
+            "label": "Length validation",
+            "description": "Validate field length constraints"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "controller_actions",
+        "question": "Which controller actions should be generated?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "index",
+            "label": "Index (list all)",
+            "description": "GET /resources",
+            "recommended": true
+          },
+          {
+            "value": "show",
+            "label": "Show (view one)",
+            "description": "GET /resources/:id",
+            "recommended": true
+          },
+          {
+            "value": "create",
+            "label": "Create",
+            "description": "POST /resources",
+            "recommended": true
+          },
+          {
+            "value": "update",
+            "label": "Update",
+            "description": "PATCH /resources/:id",
+            "recommended": true
+          },
+          {
+            "value": "destroy",
+            "label": "Destroy",
+            "description": "DELETE /resources/:id",
+            "recommended": true
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "react_components",
+        "question": "Which React components should be generated?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "list",
+            "label": "List component",
+            "description": "Display list of resources",
+            "recommended": true
+          },
+          {
+            "value": "detail",
+            "label": "Detail component",
+            "description": "Display single resource details",
+            "recommended": true
+          },
+          {
+            "value": "form",
+            "label": "Form component",
+            "description": "Create/edit form",
+            "recommended": true
+          },
+          {
+            "value": "card",
+            "label": "Card component",
+            "description": "Resource card for lists"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "css_framework",
+        "question": "Which CSS framework should be used for styling?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "tailwind",
+            "label": "Tailwind CSS",
+            "description": "Use Tailwind utility classes"
+          },
+          {
+            "value": "bootstrap",
+            "label": "Bootstrap",
+            "description": "Use Bootstrap classes"
+          },
+          {
+            "value": "none",
+            "label": "No framework",
+            "description": "Plain CSS or custom styles"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "confirm",
+        "question": "Ready to generate the resource?",
+        "type": "confirm",
+        "affects": []
+      }
+    ],
+    "context_requirements": [
+      {
+        "type": "file",
+        "pattern": "app/models/application_record.rb",
+        "optional": false
+      },
+      {
+        "type": "file",
+        "pattern": "db/schema.rb",
+        "optional": true
+      }
+    ]
+  },
+  "templates": [
+    "model-base",
+    "migration-create",
+    "controller-crud",
+    "component-list",
+    "component-detail",
+    "component-form"
+  ],
+  "snippets": [
+    "validation-presence",
+    "validation-uniqueness",
+    "association-belongs-to",
+    "association-has-many"
+  ],
+  "instructions": [
+    "Run `rails db:migrate` to create the database table",
+    "Add routes to config/routes.rb: `resources :{{tableize(modelName)}}`",
+    "Import the React components in your application"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "crud",
+    "model",
+    "controller",
+    "react",
+    "full-stack"
+  ]
+}

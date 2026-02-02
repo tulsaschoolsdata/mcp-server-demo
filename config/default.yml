@@ -1,0 +1,49 @@
+# Rails Dev MCP Server Configuration
+
+# Path to the library directory
+libraryPath: ./library
+
+# Database configuration (optional)
+# database:
+#   host: localhost
+#   port: 5432
+#   user: postgres
+#   password: password
+#   database: my_app_development
+
+# Analysis settings
+analysis:
+  # Maximum file size to analyze (in bytes)
+  maxFileSize: 1048576  # 1MB
+
+  # Patterns to exclude from analysis
+  excludePatterns:
+    - "node_modules/**"
+    - "vendor/**"
+    - ".git/**"
+    - "tmp/**"
+    - "log/**"
+    - "coverage/**"
+    - "dist/**"
+    - "build/**"
+
+  # Patterns to include in analysis
+  includePatterns:
+    - "**/*.rb"
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.jsx"
+    - "**/*.css"
+    - "**/*.scss"
+    - "**/*.erb"
+
+# Learning settings
+learning:
+  # Automatically propose patterns from successful implementations
+  autoPropose: true
+
+  # Minimum confidence score to propose (0.0 - 1.0)
+  minConfidence: 0.5
+
+  # Require manual review before adding to library
+  requireReview: true

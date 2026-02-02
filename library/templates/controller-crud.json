@@ -1,0 +1,38 @@
+{
+  "id": "controller-crud",
+  "name": "CRUD Controller",
+  "description": "Rails controller with standard CRUD actions",
+  "category": "controller",
+  "language": "ruby",
+  "filePath": "templates/controller-crud.ejs",
+  "outputPath": "app/controllers/<%= tableize(modelName) %>_controller.rb",
+  "variables": [
+    {
+      "name": "modelName",
+      "type": "string",
+      "required": true,
+      "description": "Name of the model (PascalCase)"
+    },
+    {
+      "name": "actions",
+      "type": "array",
+      "required": false,
+      "default": ["index", "show", "create", "update", "destroy"],
+      "description": "Controller actions to generate"
+    },
+    {
+      "name": "permitParams",
+      "type": "array",
+      "required": true,
+      "description": "Parameters to permit in strong params"
+    },
+    {
+      "name": "namespace",
+      "type": "string",
+      "required": false,
+      "description": "Controller namespace (e.g., 'Admin')"
+    }
+  ],
+  "version": "1.0.0",
+  "tags": ["controller", "crud", "rails"]
+}

@@ -1,0 +1,55 @@
+{
+  "patterns": [
+    {
+      "id": "crud-resource",
+      "name": "CRUD Resource",
+      "category": "full-stack"
+    },
+    {
+      "id": "nested-resource",
+      "name": "Nested Resource",
+      "category": "full-stack"
+    },
+    {
+      "id": "user-authentication",
+      "name": "User Authentication",
+      "category": "authentication"
+    },
+    {
+      "id": "file-upload",
+      "name": "File Upload",
+      "category": "model"
+    },
+    {
+      "id": "search-filter",
+      "name": "Search & Filter",
+      "category": "controller"
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "category": "controller"
+    },
+    {
+      "id": "api-endpoint",
+      "name": "API Endpoint",
+      "category": "api"
+    },
+    {
+      "id": "background-job",
+      "name": "Background Job",
+      "category": "background-job"
+    },
+    {
+      "id": "authorization",
+      "name": "Authorization",
+      "category": "authorization"
+    },
+    {
+      "id": "bootstrap-to-tailwind",
+      "name": "Bootstrap to Tailwind Migration",
+      "category": "view"
+    }
+  ],
+  "lastUpdated": "2025-01-31T00:00:00Z"
+}

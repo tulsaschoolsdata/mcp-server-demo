@@ -1,0 +1,53 @@
+{
+  "templates": [
+    {
+      "id": "model-base",
+      "name": "Base Model",
+      "category": "model",
+      "language": "ruby"
+    },
+    {
+      "id": "migration-create",
+      "name": "Create Migration",
+      "category": "migration",
+      "language": "ruby"
+    },
+    {
+      "id": "controller-crud",
+      "name": "CRUD Controller",
+      "category": "controller",
+      "language": "ruby"
+    },
+    {
+      "id": "controller-api",
+      "name": "API Controller",
+      "category": "controller",
+      "language": "ruby"
+    },
+    {
+      "id": "component-list",
+      "name": "List Component",
+      "category": "component",
+      "language": "typescript"
+    },
+    {
+      "id": "component-detail",
+      "name": "Detail Component",
+      "category": "component",
+      "language": "typescript"
+    },
+    {
+      "id": "component-form",
+      "name": "Form Component",
+      "category": "component",
+      "language": "typescript"
+    },
+    {
+      "id": "hook-use-auth",
+      "name": "useAuth Hook",
+      "category": "hook",
+      "language": "typescript"
+    }
+  ],
+  "lastUpdated": "2025-01-31T00:00:00Z"
+}

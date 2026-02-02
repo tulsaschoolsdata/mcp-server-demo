@@ -1,0 +1,114 @@
+{
+  "id": "file-upload",
+  "name": "File Upload",
+  "description": "Add file upload functionality using Active Storage",
+  "category": "model",
+  "triggers": [
+    "file upload",
+    "upload file",
+    "active storage",
+    "attachment",
+    "image upload",
+    "file attachment"
+  ],
+  "workflow": {
+    "id": "wf-file-upload",
+    "steps": [
+      {
+        "id": "model_name",
+        "question": "Which model should have file attachments?",
+        "type": "text",
+        "affects": ["templates"]
+      },
+      {
+        "id": "attachment_type",
+        "question": "What type of attachment?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "has_one_attached",
+            "label": "Single file",
+            "description": "One file per record (e.g., avatar)"
+          },
+          {
+            "value": "has_many_attached",
+            "label": "Multiple files",
+            "description": "Many files per record (e.g., gallery)"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "attachment_name",
+        "question": "Name for the attachment (e.g., avatar, images, document)",
+        "type": "text",
+        "default": "attachment",
+        "affects": ["templates"]
+      },
+      {
+        "id": "validations",
+        "question": "What validations should be added?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "content_type",
+            "label": "Content type validation",
+            "description": "Restrict to specific file types"
+          },
+          {
+            "value": "size",
+            "label": "File size validation",
+            "description": "Limit maximum file size"
+          },
+          {
+            "value": "dimension",
+            "label": "Image dimension validation",
+            "description": "Validate image dimensions"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "variants",
+        "question": "Generate image variants (thumbnails)?",
+        "type": "confirm",
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "direct_upload",
+        "question": "Enable direct upload to cloud storage?",
+        "type": "confirm",
+        "affects": ["templates", "instructions"]
+      }
+    ],
+    "context_requirements": [
+      {
+        "type": "gem",
+        "name": "activestorage"
+      }
+    ]
+  },
+  "templates": [
+    "model-attachment",
+    "component-file-upload"
+  ],
+  "snippets": [
+    "active-storage-has-one",
+    "active-storage-has-many",
+    "active-storage-variant"
+  ],
+  "instructions": [
+    "Run `rails active_storage:install` if not already set up",
+    "Run `rails db:migrate` to create Active Storage tables",
+    "Configure storage service in config/storage.yml",
+    "Add the attachment field to your form"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "file",
+    "upload",
+    "active-storage",
+    "attachment",
+    "image"
+  ]
+}

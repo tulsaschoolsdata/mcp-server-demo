@@ -1,0 +1,166 @@
+{
+  "id": "user-authentication",
+  "name": "User Authentication",
+  "description": "Set up user authentication with login, signup, and session management",
+  "category": "authentication",
+  "triggers": [
+    "add authentication",
+    "user login",
+    "signup",
+    "session",
+    "auth",
+    "login system"
+  ],
+  "workflow": {
+    "id": "wf-user-authentication",
+    "steps": [
+      {
+        "id": "auth_method",
+        "question": "Which authentication approach?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "devise",
+            "label": "Devise",
+            "description": "Full-featured authentication gem",
+            "recommended": true
+          },
+          {
+            "value": "custom",
+            "label": "Custom Authentication",
+            "description": "Build from scratch with has_secure_password"
+          },
+          {
+            "value": "omniauth",
+            "label": "OAuth Only",
+            "description": "Social login with OmniAuth"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "user_fields",
+        "question": "What additional fields should the User model have?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "name",
+            "label": "Name",
+            "description": "User's display name"
+          },
+          {
+            "value": "username",
+            "label": "Username",
+            "description": "Unique username"
+          },
+          {
+            "value": "avatar",
+            "label": "Avatar",
+            "description": "Profile picture (Active Storage)"
+          },
+          {
+            "value": "role",
+            "label": "Role",
+            "description": "User role for authorization"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "features",
+        "question": "Which authentication features?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "confirmable",
+            "label": "Email Confirmation",
+            "description": "Require email verification"
+          },
+          {
+            "value": "recoverable",
+            "label": "Password Recovery",
+            "description": "Forgot password flow",
+            "recommended": true
+          },
+          {
+            "value": "rememberable",
+            "label": "Remember Me",
+            "description": "Persistent login sessions",
+            "recommended": true
+          },
+          {
+            "value": "lockable",
+            "label": "Account Lockout",
+            "description": "Lock after failed attempts"
+          },
+          {
+            "value": "trackable",
+            "label": "Login Tracking",
+            "description": "Track sign in count and IPs"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "react_components",
+        "question": "Generate React authentication components?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "login_form",
+            "label": "Login Form",
+            "description": "Login component",
+            "recommended": true
+          },
+          {
+            "value": "signup_form",
+            "label": "Signup Form",
+            "description": "Registration component",
+            "recommended": true
+          },
+          {
+            "value": "auth_context",
+            "label": "Auth Context",
+            "description": "React context for auth state",
+            "recommended": true
+          },
+          {
+            "value": "protected_route",
+            "label": "Protected Route",
+            "description": "Route guard component"
+          }
+        ],
+        "affects": ["templates"]
+      }
+    ],
+    "context_requirements": []
+  },
+  "templates": [
+    "model-user",
+    "migration-users",
+    "controller-sessions",
+    "controller-registrations",
+    "component-login",
+    "component-signup",
+    "hook-use-auth"
+  ],
+  "snippets": [
+    "has-secure-password",
+    "authenticate-user",
+    "current-user-helper"
+  ],
+  "instructions": [
+    "Run `rails db:migrate` to create the users table",
+    "Add authentication routes",
+    "Configure mailer for password recovery if enabled",
+    "Set up session store configuration"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "authentication",
+    "user",
+    "login",
+    "session",
+    "security"
+  ]
+}

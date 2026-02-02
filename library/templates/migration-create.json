@@ -1,0 +1,46 @@
+{
+  "id": "migration-create",
+  "name": "Create Table Migration",
+  "description": "Rails migration to create a new database table",
+  "category": "migration",
+  "language": "ruby",
+  "filePath": "templates/migration-create.ejs",
+  "outputPath": "db/migrate/<%= timestamp %>_create_<%= tableize(modelName) %>.rb",
+  "variables": [
+    {
+      "name": "modelName",
+      "type": "string",
+      "required": true,
+      "description": "Name of the model (PascalCase)"
+    },
+    {
+      "name": "timestamp",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Migration timestamp (auto-generated if empty)"
+    },
+    {
+      "name": "fields",
+      "type": "array",
+      "required": true,
+      "description": "Array of field definitions [{name, type, options}]"
+    },
+    {
+      "name": "indexes",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Array of index definitions"
+    },
+    {
+      "name": "foreignKeys",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Array of foreign key references"
+    }
+  ],
+  "version": "1.0.0",
+  "tags": ["migration", "database", "rails"]
+}

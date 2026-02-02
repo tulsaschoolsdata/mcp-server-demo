@@ -1,0 +1,138 @@
+{
+  "id": "background-job",
+  "name": "Background Job",
+  "description": "Create a background job for async processing using ActiveJob/Sidekiq",
+  "category": "background-job",
+  "triggers": [
+    "background job",
+    "async job",
+    "sidekiq job",
+    "worker",
+    "queue job",
+    "delayed job"
+  ],
+  "workflow": {
+    "id": "wf-background-job",
+    "steps": [
+      {
+        "id": "job_name",
+        "question": "What is the name of the job? (e.g., SendEmailJob, ProcessImageJob)",
+        "type": "text",
+        "validation": "/^[A-Z][a-zA-Z0-9]*Job$/",
+        "affects": ["templates"]
+      },
+      {
+        "id": "queue",
+        "question": "Which queue should this job use?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default",
+            "description": "Standard priority queue",
+            "recommended": true
+          },
+          {
+            "value": "high",
+            "label": "High Priority",
+            "description": "Process immediately"
+          },
+          {
+            "value": "low",
+            "label": "Low Priority",
+            "description": "Process when resources available"
+          },
+          {
+            "value": "mailers",
+            "label": "Mailers",
+            "description": "Email sending queue"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "retry_config",
+        "question": "How should failed jobs be retried?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default (5 attempts)",
+            "description": "Standard retry with exponential backoff"
+          },
+          {
+            "value": "aggressive",
+            "label": "Aggressive (10 attempts)",
+            "description": "More retry attempts"
+          },
+          {
+            "value": "minimal",
+            "label": "Minimal (2 attempts)",
+            "description": "Quick failure"
+          },
+          {
+            "value": "none",
+            "label": "No retries",
+            "description": "Fail immediately on error"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "features",
+        "question": "What features should the job have?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "logging",
+            "label": "Detailed logging",
+            "description": "Log job progress and timing"
+          },
+          {
+            "value": "error_handling",
+            "label": "Error handling",
+            "description": "Capture and report errors"
+          },
+          {
+            "value": "unique",
+            "label": "Unique jobs",
+            "description": "Prevent duplicate job execution"
+          },
+          {
+            "value": "scheduled",
+            "label": "Scheduled execution",
+            "description": "Run at specific times"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      }
+    ],
+    "context_requirements": [
+      {
+        "type": "gem",
+        "name": "sidekiq",
+        "optional": true
+      }
+    ]
+  },
+  "templates": [
+    "job-base"
+  ],
+  "snippets": [
+    "job-perform-later",
+    "job-retry-config"
+  ],
+  "instructions": [
+    "Ensure Sidekiq is running: `bundle exec sidekiq`",
+    "Test the job: `{{jobName}}.perform_later(args)`",
+    "Monitor jobs at /sidekiq if Sidekiq Web UI is mounted"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "job",
+    "async",
+    "sidekiq",
+    "background",
+    "queue"
+  ]
+}

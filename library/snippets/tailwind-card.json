@@ -1,0 +1,18 @@
+{
+  "id": "tailwind-card",
+  "name": "Tailwind Card Component",
+  "description": "A reusable card component styled with Tailwind CSS",
+  "category": "style",
+  "language": "typescript",
+  "code": "interface CardProps {\n  title?: string;\n  children: React.ReactNode;\n  className?: string;\n  footer?: React.ReactNode;\n}\n\nexport const Card: React.FC<CardProps> = ({ title, children, className = '', footer }) => {\n  return (\n    <div className={`bg-white rounded-lg shadow-md overflow-hidden ${className}`}>\n      {title && (\n        <div className=\"px-6 py-4 border-b border-gray-200\">\n          <h3 className=\"text-lg font-semibold text-gray-900\">{title}</h3>\n        </div>\n      )}\n      <div className=\"px-6 py-4\">\n        {children}\n      </div>\n      {footer && (\n        <div className=\"px-6 py-4 bg-gray-50 border-t border-gray-200\">\n          {footer}\n        </div>\n      )}\n    </div>\n  );\n};",
+  "context": "React component file",
+  "dependencies": ["react"],
+  "tags": ["component", "tailwind", "card", "ui"],
+  "examples": [
+    {
+      "description": "Basic card with title",
+      "variables": {},
+      "output": "<Card title=\"User Profile\">\n  <p>Card content here</p>\n</Card>"
+    }
+  ]
+}

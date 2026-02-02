@@ -1,0 +1,107 @@
+{
+  "id": "authorization",
+  "name": "Authorization",
+  "description": "Add role-based authorization using Pundit or CanCanCan",
+  "category": "authorization",
+  "triggers": [
+    "authorization",
+    "permissions",
+    "role based",
+    "access control",
+    "pundit",
+    "cancancan"
+  ],
+  "workflow": {
+    "id": "wf-authorization",
+    "steps": [
+      {
+        "id": "library",
+        "question": "Which authorization library?",
+        "type": "single_select",
+        "options": [
+          {
+            "value": "pundit",
+            "label": "Pundit",
+            "description": "Policy-based authorization",
+            "recommended": true
+          },
+          {
+            "value": "cancancan",
+            "label": "CanCanCan",
+            "description": "Ability-based authorization"
+          },
+          {
+            "value": "custom",
+            "label": "Custom implementation",
+            "description": "Build authorization from scratch"
+          }
+        ],
+        "affects": ["templates", "snippets"]
+      },
+      {
+        "id": "roles",
+        "question": "What roles should be available?",
+        "type": "multi_select",
+        "options": [
+          {
+            "value": "admin",
+            "label": "Admin",
+            "description": "Full system access"
+          },
+          {
+            "value": "moderator",
+            "label": "Moderator",
+            "description": "Content moderation access"
+          },
+          {
+            "value": "member",
+            "label": "Member",
+            "description": "Standard user access"
+          },
+          {
+            "value": "guest",
+            "label": "Guest",
+            "description": "Limited public access"
+          }
+        ],
+        "affects": ["templates"]
+      },
+      {
+        "id": "resource",
+        "question": "Create policy for which resource? (leave empty for base setup)",
+        "type": "text",
+        "affects": ["templates"]
+      }
+    ],
+    "context_requirements": [
+      {
+        "type": "model",
+        "name": "User",
+        "optional": false
+      }
+    ]
+  },
+  "templates": [
+    "policy-base",
+    "policy-resource",
+    "migration-add-role"
+  ],
+  "snippets": [
+    "pundit-authorize",
+    "pundit-policy-scope"
+  ],
+  "instructions": [
+    "Add gem to Gemfile: gem 'pundit'",
+    "Run bundle install",
+    "Include Pundit in ApplicationController",
+    "Run `rails g pundit:install` for base setup"
+  ],
+  "version": "1.0.0",
+  "tags": [
+    "authorization",
+    "permissions",
+    "pundit",
+    "roles",
+    "security"
+  ]
+}

@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+class Create<%= pluralize(modelName) %> < ActiveRecord::Migration[7.1]
+  def change
+    create_table :<%= tableize(modelName) %> do |t|
+<% fields.forEach(function(field) { %>
+<% if (field.type === 'references') { %>
+      t.references :<%= field.name %>, null: false, foreign_key: true
+<% } else if (field.options) { %>
+      t.<%= field.type %> :<%= field.name %>, <%= Object.entries(field.options).map(function([k, v]) { return k + ': ' + JSON.stringify(v); }).join(', ') %>
+<% } else { %>
+      t.<%= field.type %> :<%= field.name %>
+<% } %>
+<% }); %>
+
+      t.timestamps
+    end
+<% if (indexes && indexes.length > 0) { %>
+
+<% indexes.forEach(function(index) { %>
+<% if (index.unique) { %>
+    add_index :<%= tableize(modelName) %>, :<%= index.column %>, unique: true
+<% } else { %>
+    add_index :<%= tableize(modelName) %>, :<%= index.column %>
+<% } %>
+<% }); %>
+<% } %>
+  end
+end

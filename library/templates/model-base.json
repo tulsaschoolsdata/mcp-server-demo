@@ -1,0 +1,47 @@
+{
+  "id": "model-base",
+  "name": "Base Model",
+  "description": "Rails ActiveRecord model with associations and validations",
+  "category": "model",
+  "language": "ruby",
+  "filePath": "templates/model-base.ejs",
+  "outputPath": "app/models/<%= underscore(modelName) %>.rb",
+  "variables": [
+    {
+      "name": "modelName",
+      "type": "string",
+      "required": true,
+      "description": "Name of the model (PascalCase)"
+    },
+    {
+      "name": "associations",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Model associations (belongsTo, hasMany, etc.)"
+    },
+    {
+      "name": "validations",
+      "type": "object",
+      "required": false,
+      "default": {},
+      "description": "Model validations (presence, uniqueness, etc.)"
+    },
+    {
+      "name": "scopes",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Named scopes to add"
+    },
+    {
+      "name": "callbacks",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "description": "Lifecycle callbacks"
+    }
+  ],
+  "version": "1.0.0",
+  "tags": ["model", "activerecord", "rails"]
+}

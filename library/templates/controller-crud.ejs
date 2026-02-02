@@ -1,0 +1,66 @@
+# frozen_string_literal: true
+
+<% if (namespace) { %>
+class <%= namespace %>::<%= pluralize(modelName) %>Controller < ApplicationController
+<% } else { %>
+class <%= pluralize(modelName) %>Controller < ApplicationController
+<% } %>
+  before_action :set_<%= underscore(modelName) %>, only: %i[show update destroy]
+
+<% if (actions.includes('index')) { %>
+  # GET /<%= tableize(modelName) %>
+  def index
+    @<%= tableize(modelName) %> = <%= modelName %>.all
+    render json: @<%= tableize(modelName) %>
+  end
+
+<% } %>
+<% if (actions.includes('show')) { %>
+  # GET /<%= tableize(modelName) %>/:id
+  def show
+    render json: @<%= underscore(modelName) %>
+  end
+
+<% } %>
+<% if (actions.includes('create')) { %>
+  # POST /<%= tableize(modelName) %>
+  def create
+    @<%= underscore(modelName) %> = <%= modelName %>.new(<%= underscore(modelName) %>_params)
+
+    if @<%= underscore(modelName) %>.save
+      render json: @<%= underscore(modelName) %>, status: :created
+    else
+      render json: { errors: @<%= underscore(modelName) %>.errors }, status: :unprocessable_entity
+    end
+  end
+
+<% } %>
+<% if (actions.includes('update')) { %>
+  # PATCH/PUT /<%= tableize(modelName) %>/:id
+  def update
+    if @<%= underscore(modelName) %>.update(<%= underscore(modelName) %>_params)
+      render json: @<%= underscore(modelName) %>
+    else
+      render json: { errors: @<%= underscore(modelName) %>.errors }, status: :unprocessable_entity
+    end
+  end
+
+<% } %>
+<% if (actions.includes('destroy')) { %>
+  # DELETE /<%= tableize(modelName) %>/:id
+  def destroy
+    @<%= underscore(modelName) %>.destroy
+    head :no_content
+  end
+
+<% } %>
+  private
+
+  def set_<%= underscore(modelName) %>
+    @<%= underscore(modelName) %> = <%= modelName %>.find(params[:id])
+  end
+
+  def <%= underscore(modelName) %>_params
+    params.require(:<%= underscore(modelName) %>).permit(<%= permitParams.map(function(p) { return ':' + p; }).join(', ') %>)
+  end
+end

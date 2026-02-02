@@ -1,0 +1,83 @@
+{
+  "snippets": [
+    {
+      "id": "validation-presence",
+      "name": "Presence Validation",
+      "category": "validation",
+      "language": "ruby"
+    },
+    {
+      "id": "validation-uniqueness",
+      "name": "Uniqueness Validation",
+      "category": "validation",
+      "language": "ruby"
+    },
+    {
+      "id": "validation-format",
+      "name": "Format Validation",
+      "category": "validation",
+      "language": "ruby"
+    },
+    {
+      "id": "association-belongs-to",
+      "name": "Belongs To Association",
+      "category": "association",
+      "language": "ruby"
+    },
+    {
+      "id": "association-has-many",
+      "name": "Has Many Association",
+      "category": "association",
+      "language": "ruby"
+    },
+    {
+      "id": "scope-active",
+      "name": "Active Scope",
+      "category": "scope",
+      "language": "ruby"
+    },
+    {
+      "id": "scope-recent",
+      "name": "Recent Scope",
+      "category": "scope",
+      "language": "ruby"
+    },
+    {
+      "id": "hook-use-fetch",
+      "name": "useFetch Hook",
+      "category": "hook",
+      "language": "typescript"
+    },
+    {
+      "id": "hook-use-form",
+      "name": "useForm Hook",
+      "category": "hook",
+      "language": "typescript"
+    },
+    {
+      "id": "api-response-success",
+      "name": "API Success Response",
+      "category": "api",
+      "language": "ruby"
+    },
+    {
+      "id": "api-response-error",
+      "name": "API Error Response",
+      "category": "api",
+      "language": "ruby"
+    },
+    {
+      "id": "bootstrap-card",
+      "name": "Bootstrap Card",
+      "category": "style",
+      "language": "typescript"
+    },
+    {
+      "id": "tailwind-card",
+      "name": "Tailwind Card",
+      "category": "style",
+      "language": "typescript"
+    }
+  ],
+  "lastUpdated": "2025-01-31T00:00:00Z"
+}

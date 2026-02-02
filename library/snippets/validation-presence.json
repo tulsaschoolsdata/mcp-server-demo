@@ -1,0 +1,33 @@
+{
+  "id": "validation-presence",
+  "name": "Presence Validation",
+  "description": "Validates that specified fields are not empty",
+  "category": "validation",
+  "language": "ruby",
+  "code": "validates {{fields}}, presence: true",
+  "context": "Inside a Rails model class",
+  "variables": [
+    {
+      "name": "fields",
+      "description": "Comma-separated list of field symbols (e.g., :name, :email)",
+      "example": ":name, :email"
+    }
+  ],
+  "tags": ["validation", "model", "rails"],
+  "examples": [
+    {
+      "description": "Validate name and email presence",
+      "variables": {
+        "fields": ":name, :email"
+      },
+      "output": "validates :name, :email, presence: true"
+    },
+    {
+      "description": "Validate single field",
+      "variables": {
+        "fields": ":title"
+      },
+      "output": "validates :title, presence: true"
+    }
+  ]
+}
