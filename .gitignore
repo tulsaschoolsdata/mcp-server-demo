@@ -34,3 +34,4 @@ temp/
 # library/learned/pending_review/
 # library/learned/approved/
 # library/learned/rejected/
+package-lock.json
